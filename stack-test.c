@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
     fail("empty stack should pop a NULL pointer");
   }
 
-
+/* Test driving creation first [begin_test_drive]
   //
   // Test edge case of just 1 element
   //
@@ -139,7 +139,8 @@ int main(int argc, char* argv[]) {
     fail("emptied stack should pop a NULL pointer");
   }
 
-
+  * [ end-test-drive ]
+  */
   //
   // Test destruction
   //
