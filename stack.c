@@ -12,6 +12,8 @@
 typedef struct StackNode stacknode_t;
 typedef struct StackNode StackNode;
 
+typedef struct Stack Stack;
+
 // A container for each part in the Stack.
 // Contains a reference to some arbitrary data, and a reference to the next
 // container.
