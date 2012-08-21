@@ -65,10 +65,10 @@ int s_length( Stack* stack )
 
 int s_push( Stack* stack, void* thing )
 {
-  StackNode* oldFirst = stack->first;
+  StackNode* old_first = stack->first;
   StackNode* first = malloc( sizeof( StackNode ) );
   first->data = thing;
-  first->next = oldFirst;
+  first->next = old_first;
   stack->first = first;
   return s_length( stack );
 }
@@ -88,12 +88,12 @@ void stack_node_destroy( StackNode* node )
 void* s_pop( Stack* stack )
 {
   if ( s_length( stack ) == 0 ) return NULL;
-  StackNode* oldFirst = stack->first;
-  void* data = oldFirst->data;
-  stack->first = oldFirst->next;
+  StackNode* old_first = stack->first;
+  void* data = old_first->data;
+  stack->first = old_first->next;
   // clean up the reference as it is no longer accessible through the
   // stack's interface
-  stack_node_destroy( oldFirst );
+  stack_node_destroy( old_first );
   return data;
 }
 
