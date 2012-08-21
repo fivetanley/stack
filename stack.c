@@ -51,7 +51,7 @@ struct Stack {
 Stack* s_create( void )
 {
   Stack* stack = malloc( sizeof( Stack ) );
-  stack->first = malloc( sizeof( StackNode ) );
+  stack->first = malloc( sizeof( StackNode* ) );
   return( stack );
 }
 
