@@ -5,7 +5,7 @@ struct StackNode;
 
 typedef struct Stack Stack;
 
-void s_create;
+Stack *s_create( void );
 int s_length( Stack *stack );
 int s_push( Stack *stack, void *thing );
 void* s_peek( Stack *stack );
