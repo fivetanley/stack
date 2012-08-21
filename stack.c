@@ -48,7 +48,7 @@ struct Stack {
 Stack* s_create( void )
 {
   Stack* stack = malloc( sizeof( Stack ) );
-  stack->first = malloc( sizeof( StackNode) );
+  stack->first = malloc( sizeof( StackNode ) );
   return( stack );
 }
 
@@ -97,16 +97,16 @@ void* s_pop( Stack* stack )
   return data;
 }
 
-void s_destroy_recursive( StackNode* node )
+void stack_node_destroy_recursive( StackNode* node )
 {
   if ( node == NULL ) return;
-  s_destroy_recursive( node->next );
+  stack_node_destroy_recursive( node->next );
   stack_node_destroy( node );
 }
 
 void s_destroy( Stack *stack )
 {
-  s_destroy_recursive( stack->first );
+  stack_node_destroy_recursive( stack->first );
   free( stack );
 }
 
