@@ -45,6 +45,7 @@ struct Stack {
 
 };
 
+// Creates a brand spankin' new Stack and returns a reference to it.
 Stack* s_create( void )
 {
   Stack* stack = malloc( sizeof( Stack ) );
@@ -52,19 +53,25 @@ Stack* s_create( void )
   return( stack );
 }
 
+// uses a recursive algorithm to return the length of a stack
+// Usage: pass the head/first of the list to this function.
 int s_length_recursive( StackNode* node )
 {
   if ( node->next == NULL ) return 0;
   return 1 + s_length_recursive( node->next );
 }
 
+// Returns the number of elements currently on the stack.
 int s_length( Stack* stack )
 {
   return s_length_recursive( stack->first );
 }
 
+// Pushes an element onto the top of the stack and returns the current
+// length of the stack
 int s_push( Stack* stack, void* thing )
 {
+  // save a reference to the old head/first element of the stack
   StackNode* old_first = stack->first;
   StackNode* first = malloc( sizeof( StackNode ) );
   first->data = thing;
@@ -73,11 +80,13 @@ int s_push( Stack* stack, void* thing )
   return s_length( stack );
 }
 
+// Returns a reference to the last element on the stack WITHOUT removing it.
 void* s_peek( Stack* stack )
 {
   return stack->first->data;
 }
 
+// Destroys memory for a StackNode allocated via malloc ( dynamic ).
 void stack_node_destroy( StackNode* node )
 {
   node->next = NULL;
@@ -85,18 +94,21 @@ void stack_node_destroy( StackNode* node )
   free( node );
 }
 
+// Returns the last element on the stack AND removes it from the stack.
 void* s_pop( Stack* stack )
 {
   if ( s_length( stack ) == 0 ) return NULL;
   StackNode* old_first = stack->first;
   void* data = old_first->data;
   stack->first = old_first->next;
-  // clean up the reference as it is no longer accessible through the
+  // Clean up the reference as it is no longer accessible through the
   // stack's interface
   stack_node_destroy( old_first );
   return data;
 }
 
+// Iterates through a StackNode's next until the next value is null.
+// As it unwinds, it destroys each of those next values.
 void stack_node_destroy_recursive( StackNode* node )
 {
   if ( node == NULL ) return;
@@ -104,6 +116,7 @@ void stack_node_destroy_recursive( StackNode* node )
   stack_node_destroy( node );
 }
 
+// Destroys memory created for a Stack via malloc.
 void s_destroy( Stack *stack )
 {
   stack_node_destroy_recursive( stack->first );
